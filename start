@@ -1,0 +1,24 @@
+#!/bin/bash
+
+group=$(egrep "^[^:]+:[^:]+:${SVN_GID:-0}:" /etc/group | cut -d: -f 1)
+if [ -z "$group" ] ; then
+    # Group with gid does not exist
+    group="svnserve"
+    addgroup --gid "$SVN_GID" "$group"
+fi
+
+user=$(egrep "^[^:]+:[^:]+:${SVN_UID:-0}:" /etc/passwd | cut -d: -f 1)
+if [ -n "$user" ] ; then
+    # User with the uid already exists
+    # Set the primary group for the existing user
+    usermod -g "$group" "$user"
+else
+    # User with the uid does not exist and should be added
+    user="svnserve"
+    adduser --home "/svn" --no-create-home --gecos "" \
+        --uid "${SVN_UID:-0}" --gid "${SVN_GID:-0}" \
+        --disabled-password "$user"
+fi
+
+exec /bin/su --login "$user" \
+    --command "/usr/bin/svnserve --daemon --foreground --root /svn"

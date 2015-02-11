@@ -16,6 +16,9 @@ ADD svn.conf /usr/lib/sasl2/
 RUN rm -f /etc/msmtprc && \
     ln -s /svn/msmtprc /etc/msmtprc
 
+# Add the start script
+ADD start /opt/
+
 # Archives and configuration are stored in /svn
 VOLUME [ "/svn" ]
 
@@ -23,5 +26,4 @@ VOLUME [ "/svn" ]
 EXPOSE 3690
 
 # Run the svnserve server
-CMD [ "/usr/bin/svnserve", "--daemon", "--foreground", "--root", "/svn" ]
-
+CMD [ "/opt/start" ]

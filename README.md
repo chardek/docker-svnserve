@@ -13,5 +13,10 @@ properties:
 * /svn/<archive> for as many subversion archives as desired
 * /svn/svn.sasldb for the subversion sasl user/password database
 * /svn/msmtprc for the msmtp-mta configuration for sending mail
+
+You might also want to control what uid and gid that svnserver uses. You can do so by setting environment variables:
+* SVN_UID
+* SVN_GID
+
  
 
