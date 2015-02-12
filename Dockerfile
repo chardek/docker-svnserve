@@ -5,7 +5,8 @@ MAINTAINER Chris Hardekopf <chrish@basis.com>
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y subversion \
     svnmailer msmtp msmtp-mta \
-    python perl && \
+    python perl \
+    pngcrush optipng advancecomp jpegoptim && \
     rm -rf /var/lib/apt/lists/*
 
 # Put sasl configuration in place, this expects to find the
