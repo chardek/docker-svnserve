@@ -13,9 +13,8 @@ RUN apt-get update && \
 # sasl password stuff at /svn/svn.sasldb
 ADD svn.conf /usr/lib/sasl2/
 
-# Set up msmtp pointing to /svn/msmtprc
-RUN rm -f /etc/msmtprc && \
-    ln -s /svn/msmtprc /etc/msmtprc
+# Remove default msmtprc
+RUN rm -f /etc/msmtprc
 
 # Add the start script
 ADD start /opt/
