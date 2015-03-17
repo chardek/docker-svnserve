@@ -18,5 +18,8 @@ You might also want to control what uid and gid that svnserver uses. You can do 
 * SVN_UID
 * SVN_GID
 
+You can get it to log inside the container by setting the environment variable SVN_LOG to the log file location. Remember that the SVN_UID must be able to write the log file.
+
+
  
 

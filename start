@@ -20,5 +20,10 @@ else
         --disabled-password "$user"
 fi
 
+command="/usr/bin/svnserve --daemon --foreground --root /svn"
+if [ -n "$SVN_LOG" ] ; then
+    command="$command --log-file '$SVN_LOG'"
+fi
+
 /bin/su --login "$user" \
-    --command "/usr/bin/svnserve --daemon --foreground --log-file /tmp/svnserve.log --root /svn"
+    --command "$command"
