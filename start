@@ -20,10 +20,29 @@ else
         --disabled-password "$user"
 fi
 
-command="/usr/bin/svnserve --daemon --foreground --root /svn"
+optional_args=
 if [ -n "$SVN_LOG" ] ; then
-    command="$command --log-file '$SVN_LOG'"
+    optional_args="--log-file $SVN_LOG"
 fi
 
-/bin/su --login "$user" \
-    --command "$command"
+# Generate xinetd configuration
+cat > /etc/xinetd.d/svnserve <<END
+service svn
+{
+    disable = no
+    socket_type = stream
+    protocol = tcp
+    wait = no
+    log_type = FILE ${CONNECTION_LOG:-/var/log/svnserve_connection.log}
+    instances = UNLIMITED
+    cps = 100 10
+    log_on_success = HOST PID EXIT DURATION
+    log_on_failure = HOST
+    user = $user
+    group = $group
+    server = /usr/bin/svnserve
+    server_args = --inetd --root /svn $optional_args
+}
+END
+
+exec /usr/sbin/xinetd -dontfork

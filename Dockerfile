@@ -4,7 +4,7 @@ MAINTAINER Chris Hardekopf <chrish@basis.com>
 # Install subversion and supporting packages (for hooks)
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y subversion \
-    svnmailer msmtp msmtp-mta \
+    svnmailer msmtp msmtp-mta xinetd \
     python perl \
     pngcrush optipng advancecomp jpegoptim && \
     rm -rf /var/lib/apt/lists/*
