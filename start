@@ -36,8 +36,6 @@ service svn
     log_type = FILE ${CONNECTION_LOG:-/var/log/svnserve_connection.log}
     instances = UNLIMITED
     cps = 100 10
-    log_on_success = HOST PID EXIT DURATION
-    log_on_failure = HOST
     user = $user
     group = $group
     server = /usr/bin/svnserve
