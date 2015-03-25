@@ -3,7 +3,7 @@
 group=$(egrep "^[^:]+:[^:]+:${SVN_GID:-0}:" /etc/group | cut -d: -f 1)
 if [ -z "$group" ] ; then
     # Group with gid does not exist
-    group="svnserve"
+    group="${SVN_USER:-svnserve}"
     addgroup --gid "$SVN_GID" "$group"
 fi
 
@@ -14,7 +14,7 @@ if [ -n "$user" ] ; then
     usermod -g "$group" "$user"
 else
     # User with the uid does not exist and should be added
-    user="svnserve"
+    user="${SVN_USER:-svnserve}"
     adduser --home "/svn" --no-create-home --gecos "" \
         --uid "${SVN_UID:-0}" --gid "${SVN_GID:-0}" \
         --disabled-password "$user"

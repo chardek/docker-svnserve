@@ -14,9 +14,10 @@ properties:
 It also expects a volume mounted for msmtp configuration:
 * /etc/msmtprc
 
-You might also want to control what uid and gid that svnserver uses. You can do so by setting environment variables:
+You might also want to control what uid and gid that svnserver uses. The default created user name is "svnserve", but can be changed. You can do so by setting environment variables:
 * SVN_UID
 * SVN_GID
+* SVN_USER
 
 Connections are not normally logged, but you can change that by setting the environment variable CONNECTION_LOG. You can get svnserve to log inside the container by setting the environment variable SVN_LOG to the log file location. Remember that the SVN_UID must be able to write the svnserve log file.
 
