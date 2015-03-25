@@ -20,9 +20,26 @@ else
         --disabled-password "$user"
 fi
 
+# svnserve logging
 optional_args=
 if [ -n "$SVN_LOG" ] ; then
     optional_args="--log-file $SVN_LOG"
+fi
+
+# xinetd connection logging
+clogging=
+if [ -n "$CONNECTION_LOG" ] ; then
+    read -d '' clogging <<END
+    log_type = FILE ${CONNECTION_LOG}
+    log_on_success = HOST EXIT DURATION
+    log_on_failure = HOST
+END
+else
+    read -d '' clogging <<END
+    log_type = FILE /var/log/svnserver_connection.log
+    log_on_success =
+    log_on_failure =
+END
 fi
 
 # Generate xinetd configuration
@@ -33,7 +50,7 @@ service svn
     socket_type = stream
     protocol = tcp
     wait = no
-    log_type = FILE ${CONNECTION_LOG:-/var/log/svnserve_connection.log}
+    $clogging
     instances = UNLIMITED
     cps = 100 10
     user = $user
