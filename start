@@ -60,4 +60,4 @@ service svn
 }
 END
 
-exec /usr/sbin/xinetd -dontfork
+exec /usr/sbin/xinetd -dontfork -filelog "${XINETD_LOG:-/var/log/xinetd.log}"
