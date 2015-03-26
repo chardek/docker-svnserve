@@ -38,7 +38,7 @@ else
     read -d '' clogging <<END
     log_type = FILE /var/log/svnserver_connection.log
     log_on_success =
-    log_on_failure =
+    log_on_failure = HOST
 END
 fi
 
