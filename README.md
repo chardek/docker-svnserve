@@ -19,7 +19,7 @@ You might also want to control what uid and gid that svnserver uses. The default
 * SVN_GID
 * SVN_USER
 
-Connections are not normally logged, but you can change that by setting the environment variable CONNECTION_LOG. Xinetd logging goes to "/var/log/xinetd.log" by default but can be changed using the environment variable XINETD_LOG. You can get svnserve to log inside the container by setting the environment variable SVN_LOG to the log file location. Remember that the SVN_UID must be able to write the svnserve log file.
+Connections are not normally logged, but you can change that by setting the environment variable CONNECTION_LOG. Xinetd logging goes to "/var/log/xinetd.log" by default but can be changed using the environment variable XINETD_LOG. The "cps" setting defaults to "50 10" (50 connections per second with 10 second cooldown), but can be changed with the CPS environment variable. You can get svnserve to log inside the container by setting the environment variable SVN_LOG to the log file location. Remember that the SVN_UID must be able to write the svnserve log file.
 
 
  
