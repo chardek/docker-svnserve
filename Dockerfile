@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER Chris Hardekopf <chrish@basis.com>
 
 # Install subversion and supporting packages (for hooks)
