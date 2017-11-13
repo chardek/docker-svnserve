@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:artful
 MAINTAINER Chris Hardekopf <chrish@basis.com>
 
 # Install subversion and supporting packages (for hooks)
